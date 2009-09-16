@@ -3,8 +3,10 @@ module FAECade
 
     class Wall
 
-      def initialize(display)
-        @display = display
+      attr_reader :display, :physical_layout
+
+      def initialize(display, physical_layout)
+        @display, @physical_layout = display, physical_layout
         @display.register(self)
       end
 

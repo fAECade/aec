@@ -3,7 +3,7 @@ module FAECade
 
     class Display
 
-      MAIN_BUILDING_NORTH =
+      MAIN_BUILDING_NORTH_LAYOUT =
       [
          nil,  nil,  nil,   0,    1,
          2,     3,    4,    5,    6,
@@ -33,7 +33,7 @@ module FAECade
       ]
 
 
-      MAIN_BUILDING_EAST =
+      MAIN_BUILDING_EAST_LAYOUT =
       [
         nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  120,  121,
         122,  123,  124,  125,  126,  127,  128,  129,  130,  131,
@@ -62,7 +62,7 @@ module FAECade
       ]
 
 
-      MAIN_BUILDING_SOUTH =
+      MAIN_BUILDING_SOUTH_LAYOUT =
       [
         350,  351,  352,  353,  nil,  nil,  nil,  nil,  nil,  nil,
         354,  355,  366,  367,  368,  369,  370,  371,  372,  373,
@@ -88,7 +88,7 @@ module FAECade
       ]
 
 
-      MAIN_BUILDING_SOUTH_STREET_LEVEL =
+      MAIN_BUILDING_SOUTH_STREET_LEVEL_LAYOUT =
       [
         547,  548,  549,  550,  551,  552,  553,  554,  555,  556,  557,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,
         558,  559,  560,  561,  nil,  nil,  nil,  562,  563,  564,  565,  566,  567,  568,  569,  570,  571,  572,  573,  nil,  nil,  nil,  nil,  nil,  nil,  nil,  nil,
@@ -98,7 +98,7 @@ module FAECade
       ]
 
 
-      MAIN_BUILDING_WEST =
+      MAIN_BUILDING_WEST_LAYOUT =
       [
         633,  634,  635,  636,  637,  638,  nil,  nil,  nil,  nil,
         639,  640,  641,  642,  643,  644,  645,  646,  647,  648,
@@ -125,7 +125,7 @@ module FAECade
       ]
 
 
-      FUTURE_LAB_NORTH =
+      FUTURE_LAB_NORTH_LAYOUT =
       [
         842,  843,  844,  845,  846,  847,  nil,  nil,  nil,  nil,  nil,  nil,  nil,
         848,  849,  850,  851,  852,  853,  854,  nil,  nil,  nil,  nil,  nil,  nil,
@@ -138,7 +138,7 @@ module FAECade
       ]
 
 
-      FUTURE_LAB_EAST =
+      FUTURE_LAB_EAST_LAYOUT =
       [
         912,  913,  914,  915,  916,
         917,  918,  919,  920,  921,
@@ -153,7 +153,7 @@ module FAECade
       ]
 
 
-      FUTURE_LAB_SOUTH =
+      FUTURE_LAB_SOUTH_LAYOUT =
       [
          nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   965,   964,   963,   962,   961,   960,   959,   958,
          nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   974,   973,   972,   971,   970,   969,   968,   967,   966,

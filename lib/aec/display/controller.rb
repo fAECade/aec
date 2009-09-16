@@ -9,6 +9,9 @@ module FAECade
 
       def self.create
 
+        # only one instance needed
+        return @controller if @controller
+
         # TODO read these from config file
 
         server       = 'localhost'
@@ -20,7 +23,7 @@ module FAECade
         display = FAECade::Display::Display.new(r, g, b)
         network = FAECade::Network::Controller.new(display, server, port)
 
-        new(display, network)
+        @controller = new(display, network)
 
       end
 
@@ -45,10 +48,26 @@ module FAECade
       end
 
 
+      def register(wall)
+        # do something smart, possibly with a yet to be created WallManager
+      end
+
+
       private
 
       def initialize(display, network)
-        @display, @network = display, network
+
+        @display, @network, @walls = display, network, []
+
+        @walls << Wall.new(@display, Display::MAIN_BUILDING_NORTH_LAYOUT)
+        @walls << Wall.new(@display, Display::MAIN_BUILDING_EAST_LAYOUT)
+        @walls << Wall.new(@display, Display::MAIN_BUILDING_SOUTH_LAYOUT)
+        @walls << Wall.new(@display, Display::MAIN_BUILDING_SOUTH_STREET_LEVEL_LAYOUT)
+        @walls << Wall.new(@display, Display::MAIN_BUILDING_WEST_LAYOUT)
+        @walls << Wall.new(@display, Display::FUTURE_LAB_NORTH_LAYOUT)
+        @walls << Wall.new(@display, Display::FUTURE_LAB_EAST_LAYOUT)
+        @walls << Wall.new(@display, Display::FUTURE_LAB_SOUTH_LAYOUT)
+
       end
 
     end

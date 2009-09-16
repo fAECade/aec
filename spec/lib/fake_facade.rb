@@ -2,13 +2,16 @@ class FakeFacade
 
   def self.create
 
+    # only one instance needed
+    return @facade if @facade
+
     # TODO read these from config file
 
     server       = 'localhost'
     port         = 4321
     frame_length = FAECade::Display::Display::BUFFER_LENGTH
 
-    new(server, port, frame_length)
+    @facade = new(server, port, frame_length)
 
   end
 
