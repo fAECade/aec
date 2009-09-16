@@ -4,17 +4,15 @@ describe "The facade controller" do
 
   before(:all) do
 
-    server       = 'localhost'
-    port         = 4321
-    frame_length = FAECade::Display::BUFFER_LENGTH
-
-    @facade = FakeFacade.new(server, port, frame_length)
+    @facade = FakeFacade.create
     @facade.start
     puts "Started the virtual AEC facade"
 
     @r, @g, @b  = 0, 0, 0
-    @display    = FAECade::Display.new(@r, @g, @b)
-    @controller = FAECade::Network::Controller.new(@display, server, port)
+    @controller = FAECade::Display::Controller.create
+    @controller.set_color(@r, @g, @b)
+    puts "Started the AEC facade display controller"
+
   end
 
   after(:each) do
@@ -27,20 +25,20 @@ describe "The facade controller" do
   end
 
   it "should stream frames at a rate of 25 FPS to the AEC facade" do
-    @controller.start(1)
-    @controller.join
+    @controller.run(1)
+    @controller.network.join
     @facade.received_frames.size.should == FAECade::Network::Controller::FPS
-    @facade.received_frames.all? { |f| f.should == @display.frame }
+    @facade.received_frames.all? { |f| f.should == @controller.display.frame }
   end
 
   it "should always send the latest display buffer content as the current frame" do
     pending do
-      @controller.start(1)
+      @controller.run(1)
       (0..FAECade::Network::Controller::FPS).each do |idx|
         sleep 0.04
-        @display.set_color(1,1,1)
-        @facade.received_frames[idx].should == @display.frame
-        @controller.join
+        @controller.set_color(1,1,1)
+        @facade.received_frames[idx].should == @controller.display.frame
+        @controller.network.join
       end
       @facade.received_frames.size.should == FAECade::Network::Controller::FPS
     end

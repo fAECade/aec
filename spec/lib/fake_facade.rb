@@ -1,7 +1,15 @@
 class FakeFacade
 
-  def initialize(address, port, frame_length)
-    @address, @port, @frame_length = address, port, frame_length
+  def self.create
+
+    # TODO read these from config file
+
+    server       = 'localhost'
+    port         = 4321
+    frame_length = FAECade::Display::Display::BUFFER_LENGTH
+
+    new(server, port, frame_length)
+
   end
 
   def start
@@ -26,6 +34,13 @@ class FakeFacade
 
   def clear_received_frames
     @received_frames.clear
+  end
+
+
+  private
+
+  def initialize(address, port, frame_length)
+    @address, @port, @frame_length = address, port, frame_length
   end
 
 end
