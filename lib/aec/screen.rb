@@ -1,0 +1,3 @@
+class Screen
+
+end

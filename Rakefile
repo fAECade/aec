@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "aec"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Manage interaction of games with the AEC building}
+    gem.description = %Q{Manage interaction of games with the AEC building}
     gem.email = "gamsnjaga@gmail.com"
     gem.homepage = "http://github.com/snusnu/aec"
     gem.authors = ["snusnu"]
@@ -20,12 +20,11 @@ end
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
+  spec.spec_opts << '--colour' << '--format specdoc'
 end
 
 Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.libs << 'lib' << 'spec'
-  spec.pattern = 'spec/**/*_spec.rb'
   spec.rcov = true
 end
 

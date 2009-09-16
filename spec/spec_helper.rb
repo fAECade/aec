@@ -1,9 +1,16 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'aec'
 require 'spec'
-require 'spec/autorun'
+
+# Support running specs with 'rake spec' and 'spec'
+# If running with 'spec' command, make sure you have
+# something to the effect of 'export RUBYOPT=-Ispec' set
+$LOAD_PATH.unshift('lib') unless $LOAD_PATH.include?('lib')
+
+# the library
+require 'aec'
+
+# faked aec facade server
+require 'lib/fake_facade'
 
 Spec::Runner.configure do |config|
-  
+
 end
