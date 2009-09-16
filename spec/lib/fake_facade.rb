@@ -20,11 +20,7 @@ class FakeFacade
     @server_thread.kill
   end
 
-  # constants ftw
-  SLEEP_INTERVAL = 0.001
-
   def received_frames
-    sleep SLEEP_INTERVAL
     @received_frames.map { |frame_data| frame_data[0] }
   end
 

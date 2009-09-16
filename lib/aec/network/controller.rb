@@ -12,35 +12,31 @@ module FAECade
       end
 
       def start(seconds = nil)
-        start_time = Time.now
-        @player = Thread.start do
-          code = lambda do
-            sleep 1.0 / FPS
-            update(display.frame, server, port)
-            count += 1
-          end
+        @controller = Thread.start do
           if seconds
-            count = 0
-            while count < seconds * FPS do
-              code.call; count += 1
-            end
-            #(0..seconds*FPS).each { |i| code.call }
+            (seconds * FPS).times { update }
           else
-            loop { code.call }
+            loop { update }
           end
         end
-        self
+      end
+
+      def update
+        send(display.frame, server, port)
+        sleep 1.0 / FPS
       end
 
       def join
-        @player.join
+        @controller.join
       end
 
       def stop
-        @player.kill
+        @controller.kill
       end
 
-      def update(frame, server, port)
+      private
+
+      def send(frame, server, port)
         UDPSocket.open.send(frame, 0, server, port)
       end
 
