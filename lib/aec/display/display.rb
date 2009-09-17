@@ -169,21 +169,26 @@ module FAECade
       ]
 
 
-      NR_OF_ADDRESSES = 1085
-      PACKET_SIZE     =    5
-      BUFFER_LENGTH   = NR_OF_ADDRESSES * PACKET_SIZE
+      NR_OF_ADDRESSES    = 1085
+      PACKET_SIZE        =    4
 
-      OFFSET_LOW      =    0 # offset of low panel address byte
-      OFFSET_HIGH     =    1 # offset of high panel address byte
-      OFFSET_RED      =    2 # offset of red color in package
-      OFFSET_GREEN    =    3 # offset of green color in package
-      OFFSET_BLUE     =    4 # offset of blue color in package
+      PACKET_BYTE_LENGTH =    5
+      FRAME_LENGTH       =    NR_OF_ADDRESSES * PACKET_BYTE_LENGTH
 
-      DEFAULT_RED     =  120
-      DEFAULT_GREEN   =  120
-      DEFAULT_BLUE    =    0
+      BUFFER_LENGTH      =    NR_OF_ADDRESSES * PACKET_SIZE
+
+      OFFSET_ADDRESS     =    0 # offset of panel address in package
+      OFFSET_RED         =    1 # offset of red color in package
+      OFFSET_GREEN       =    2 # offset of green color in package
+      OFFSET_BLUE        =    3 # offset of blue color in package
+
+      DEFAULT_RED        =  120
+      DEFAULT_GREEN      =  120
+      DEFAULT_BLUE       =    0
+
 
       attr_reader :buffer
+
 
       # Initialize a new illumination frame for the AEC facade
       #
@@ -208,16 +213,11 @@ module FAECade
       end
 
       def set_pixel(address, r, g, b)
-        buffer[ address * PACKET_SIZE + OFFSET_LOW   ] = address % 256
-        buffer[ address * PACKET_SIZE + OFFSET_HIGH  ] = address / 256
-        buffer[ address * PACKET_SIZE + OFFSET_RED   ] = r
-        buffer[ address * PACKET_SIZE + OFFSET_GREEN ] = g
-        buffer[ address * PACKET_SIZE + OFFSET_BLUE  ] = b
+        buffer[ address * PACKET_SIZE + OFFSET_ADDRESS ] = address
+        buffer[ address * PACKET_SIZE + OFFSET_RED     ] = r
+        buffer[ address * PACKET_SIZE + OFFSET_GREEN   ] = g
+        buffer[ address * PACKET_SIZE + OFFSET_BLUE    ] = b
         self
-      end
-
-      def frame
-        buffer.map { |b| b.chr }.join
       end
 
     end

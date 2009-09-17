@@ -5,9 +5,9 @@ module FAECade
 
       attr_reader :display, :physical_layout
 
-      def initialize(display, physical_layout)
-        @display, @physical_layout = display, physical_layout
-        @display.register(self)
+      def initialize(controller, physical_layout)
+        @controller, @physical_layout = controller, physical_layout
+        @controller.register(self)
       end
 
     end

@@ -14,3 +14,11 @@ require 'lib/fake_facade'
 Spec::Runner.configure do |config|
 
 end
+
+module SpecHelper
+
+  def unpacked_frame(frame)
+    frame.unpack(FAECade::Network::Controller::PACK_TEMPLATE)
+  end
+
+end

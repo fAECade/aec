@@ -16,7 +16,7 @@ module FAECade
 
         server       = 'localhost'
         port         = 4321
-        frame_length = FAECade::Display::Display::BUFFER_LENGTH
+        frame_length = FAECade::Display::Display::FRAME_LENGTH
         r, g, b      = 0, 0, 0
 
 
@@ -28,6 +28,15 @@ module FAECade
       end
 
       attr_reader :display, :network
+
+
+      def fps
+        network.fps
+      end
+
+      def fps=(frames_per_second)
+        network.fps = frames_per_second
+      end
 
 
       def run(seconds = nil)
@@ -59,14 +68,14 @@ module FAECade
 
         @display, @network, @walls = display, network, []
 
-        @walls << Wall.new(@display, Display::MAIN_BUILDING_NORTH_LAYOUT)
-        @walls << Wall.new(@display, Display::MAIN_BUILDING_EAST_LAYOUT)
-        @walls << Wall.new(@display, Display::MAIN_BUILDING_SOUTH_LAYOUT)
-        @walls << Wall.new(@display, Display::MAIN_BUILDING_SOUTH_STREET_LEVEL_LAYOUT)
-        @walls << Wall.new(@display, Display::MAIN_BUILDING_WEST_LAYOUT)
-        @walls << Wall.new(@display, Display::FUTURE_LAB_NORTH_LAYOUT)
-        @walls << Wall.new(@display, Display::FUTURE_LAB_EAST_LAYOUT)
-        @walls << Wall.new(@display, Display::FUTURE_LAB_SOUTH_LAYOUT)
+        @walls << Wall.new(self, Display::MAIN_BUILDING_NORTH_LAYOUT)
+        @walls << Wall.new(self, Display::MAIN_BUILDING_EAST_LAYOUT)
+        @walls << Wall.new(self, Display::MAIN_BUILDING_SOUTH_LAYOUT)
+        @walls << Wall.new(self, Display::MAIN_BUILDING_SOUTH_STREET_LEVEL_LAYOUT)
+        @walls << Wall.new(self, Display::MAIN_BUILDING_WEST_LAYOUT)
+        @walls << Wall.new(self, Display::FUTURE_LAB_NORTH_LAYOUT)
+        @walls << Wall.new(self, Display::FUTURE_LAB_EAST_LAYOUT)
+        @walls << Wall.new(self, Display::FUTURE_LAB_SOUTH_LAYOUT)
 
       end
 

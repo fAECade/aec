@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "The facade controller" do
 
+  include SpecHelper
+
   before(:all) do
 
     @facade = FakeFacade.create
@@ -22,26 +24,38 @@ describe "The facade controller" do
   after(:all) do
     @facade.stop
     puts "Stopped the virtual AEC facade"
+    @controller.kill
+    puts "Stopped the AEC facade display controller"
   end
 
-  it "should stream frames at a rate of 25 FPS to the AEC facade" do
+  it "should respect the specified framerate when streaming to the AEC facade" do
+
     @controller.run(1)
     @controller.network.join
-    @facade.received_frames.size.should == FAECade::Network::Controller::FPS
-    @facade.received_frames.all? { |f| f.should == @controller.display.frame }
+
+    @facade.received_frames.size.should == @controller.fps
+    @facade.received_frames.all? { |f| unpacked_frame(f).should == @controller.display.buffer }
+
   end
 
   it "should always send the latest display buffer content as the current frame" do
-    pending do
-      @controller.run(1)
-      (0..FAECade::Network::Controller::FPS).each do |idx|
-        sleep 0.04
-        @controller.set_color(1,1,1)
-        @facade.received_frames[idx].should == @controller.display.frame
-        @controller.network.join
-      end
-      @facade.received_frames.size.should == FAECade::Network::Controller::FPS
-    end
+
+    start_frame = @controller.display.buffer.dup
+
+    @controller.run(1)
+    sleep 0.4
+    @controller.set_color(2,2,2)
+    sleep 0.4
+
+    stop_frame = @controller.display.buffer.dup
+
+    @controller.network.join
+
+    @facade.received_frames.size.should == @controller.fps
+
+    unpacked_frame(@facade.received_frames.first).should == start_frame
+    unpacked_frame(@facade.received_frames.last ).should == stop_frame
+
   end
 
 end
