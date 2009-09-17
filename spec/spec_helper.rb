@@ -1,4 +1,5 @@
 require 'spec'
+require 'enumerator' # support Array#each_slice on 1.8.6
 
 # Support running specs with 'rake spec' and 'spec'
 # If running with 'spec' command, make sure you have
