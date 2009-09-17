@@ -5,6 +5,11 @@ module FAECade
 
       DEFAULT_FPS = 25
 
+      # Network packet layout
+      PACKET_BYTE_LENGTH = 5
+      FRAME_LENGTH       = FAECade::Display::Display::NR_OF_ADDRESSES * PACKET_BYTE_LENGTH
+
+
       # 'S' will give an unsigned short that is 2 bytes long
       # 'CCC'  will give 3 unsigned chars that are 3 bytes long
       # I don't know why RGB is char but the AEC spec mentions

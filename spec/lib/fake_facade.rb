@@ -9,7 +9,7 @@ class FakeFacade
 
     server       = 'localhost'
     port         = 4321
-    frame_length = FAECade::Display::Display::FRAME_LENGTH
+    frame_length = FAECade::Network::Controller::FRAME_LENGTH
 
     @facade = new(server, port, frame_length)
 

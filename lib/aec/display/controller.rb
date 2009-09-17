@@ -12,15 +12,10 @@ module FAECade
         # only one instance needed
         return @controller if @controller
 
-        # TODO read these from config file
-
-        server       = 'localhost'
-        port         = 4321
-        frame_length = FAECade::Display::Display::FRAME_LENGTH
-        r, g, b      = 0, 0, 0
-
-
+        r, g, b = 0, 0, 0 # TODO read these from config file
         display = FAECade::Display::Display.new(r, g, b)
+
+        server, port = 'localhost', 4321 # TODO read these from config file
         network = FAECade::Network::Controller.new(display, server, port)
 
         @controller = new(display, network)

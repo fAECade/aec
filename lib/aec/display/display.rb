@@ -172,9 +172,6 @@ module FAECade
       NR_OF_ADDRESSES    = 1085
       PACKET_SIZE        =    4
 
-      PACKET_BYTE_LENGTH =    5
-      FRAME_LENGTH       =    NR_OF_ADDRESSES * PACKET_BYTE_LENGTH
-
       BUFFER_LENGTH      =    NR_OF_ADDRESSES * PACKET_SIZE
 
       OFFSET_ADDRESS     =    0 # offset of panel address in package
