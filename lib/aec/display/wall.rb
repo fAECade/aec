@@ -10,6 +10,10 @@ module FAECade
         @controller.register(self)
       end
 
+      def display_offset
+        physical_layout.compact.first
+      end
+
     end
 
   end

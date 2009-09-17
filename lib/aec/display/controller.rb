@@ -12,15 +12,11 @@ module FAECade
         @controller ||= new(config)
       end
 
-      attr_reader :display, :network
+      attr_reader :display, :walls, :network
 
 
       def fps
         network.fps
-      end
-
-      def fps=(frames_per_second)
-        network.fps = frames_per_second
       end
 
 
@@ -53,7 +49,7 @@ module FAECade
 
         c = config['facade']
         @display = FAECade::Display::Display.new(c['r'], c['g'], c['b'])
-        @network = FAECade::Network::Controller.new(@display, c['host'], c['port'])
+        @network = FAECade::Network::Controller.new(c['host'], c['port'], @display, c['fps'])
 
         @walls   = []
 

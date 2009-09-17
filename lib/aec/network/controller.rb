@@ -17,12 +17,11 @@ module FAECade
       PACK_TEMPLATE = 'SCCC' * FAECade::Display::Display::NR_OF_ADDRESSES
 
 
-      attr_writer :fps
-      attr_reader :display, :server, :port
+      attr_reader :display, :host, :port
 
 
-      def initialize(display, server, port)
-        @display, @server, @port = display, server, port
+      def initialize(host, port, display, fps = nil)
+        @host, @port, @display, @fps = host, port, display, fps
       end
 
       def start(seconds = nil)
@@ -38,7 +37,7 @@ module FAECade
       def update
         #puts "sending: #{display.buffer.inspect}"
         frame = display.buffer.pack(PACK_TEMPLATE)
-        send(frame, server, port)
+        send(frame, host, port)
         sleep 1.0 / fps
       end
 
@@ -58,8 +57,8 @@ module FAECade
 
       private
 
-      def send(frame, server, port)
-        UDPSocket.open.send(frame, 0, server, port)
+      def send(frame, host, port)
+        UDPSocket.open.send(frame, 0, host, port)
       end
 
     end
