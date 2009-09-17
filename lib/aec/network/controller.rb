@@ -5,10 +5,10 @@ module FAECade
 
       DEFAULT_FPS = 25
 
-      # 'S' will give an unsigned short that is 2 bytes
-      # 'CCC'  will give 3 unsigned chars
-      # I don't know why rgb is char but the AEC spec says so
-      # (if I interpret it right)
+      # 'S' will give an unsigned short that is 2 bytes long
+      # 'CCC'  will give 3 unsigned chars that are 3 bytes long
+      # I don't know why RGB is char but the AEC spec mentions
+      # that on page 14 (if I interpret that right)
       PACK_TEMPLATE = 'SCCC' * FAECade::Display::Display::NR_OF_ADDRESSES
 
 
