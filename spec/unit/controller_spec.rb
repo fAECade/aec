@@ -24,7 +24,7 @@ describe FAECade::Display::Controller do
     end
 
     it "should initialize all available walls" do
-      @controller.walls.count.should == FAECade::Display::Display::NR_OF_WALLS
+      @controller.walls.size.should == FAECade::Display::Display::NR_OF_WALLS
       @controller.walls.all? { |w| w.should be_kind_of(FAECade::Display::Wall) }
     end
 
