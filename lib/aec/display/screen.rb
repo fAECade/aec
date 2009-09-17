@@ -23,7 +23,7 @@ module FAECade
       #     2,3,4,5
       #       3,4
       def init_virtual_area
-        width = @dimensions.map { |line| line.first }.max
+        width = @area.map { |line| line.last }.max
         @virtual_area = [][]
         @dimensions.each do |line|
           (O..width).each do |col|
