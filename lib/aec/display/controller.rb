@@ -1,6 +1,6 @@
 require 'aec/display/display'
 require 'aec/display/wall'
-require 'aec/display/display'
+require 'aec/display/screen'
 
 module FAECade
   module Display
