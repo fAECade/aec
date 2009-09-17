@@ -1,3 +1,4 @@
+require 'aec/utils/config'
 require 'aec/display/display'
 require 'aec/display/wall'
 require 'aec/display/screen'
@@ -7,19 +8,8 @@ module FAECade
 
     class Controller
 
-      def self.create
-
-        # only one instance needed
-        return @controller if @controller
-
-        r, g, b = 0, 0, 0 # TODO read these from config file
-        display = FAECade::Display::Display.new(r, g, b)
-
-        server, port = 'localhost', 4321 # TODO read these from config file
-        network = FAECade::Network::Controller.new(display, server, port)
-
-        @controller = new(display, network)
-
+      def self.create(config)
+        @controller ||= new(config)
       end
 
       attr_reader :display, :network
@@ -59,9 +49,13 @@ module FAECade
 
       private
 
-      def initialize(display, network)
+      def initialize(config)
 
-        @display, @network, @walls = display, network, []
+        c = config['facade']
+        @display = FAECade::Display::Display.new(c['r'], c['g'], c['b'])
+        @network = FAECade::Network::Controller.new(@display, c['host'], c['port'])
+
+        @walls   = []
 
         @walls << Wall.new(self, Display::MAIN_BUILDING_NORTH_LAYOUT)
         @walls << Wall.new(self, Display::MAIN_BUILDING_EAST_LAYOUT)

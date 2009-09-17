@@ -8,12 +8,18 @@ describe "The facade controller" do
 
     @facade = FakeFacade.create
     @facade.start
+
     puts "Started the virtual AEC facade"
 
-    @r, @g, @b  = 0, 0, 0
-    @controller = FAECade::Display::Controller.create
-    @controller.set_color(@r, @g, @b)
+    @config = FAECade::Config.load_config('config.yml')
+
+    @controller = FAECade.start(@config)
+
     puts "Started the AEC facade display controller"
+
+    @r = @config['facade']['r']
+    @g = @config['facade']['g']
+    @b = @config['facade']['b']
 
   end
 

@@ -17,6 +17,11 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
 
+desc "Generate a sample config"
+file "config.yml" => "config.yml.sample" do |t|
+  sh "cp #{t.prerequisites.first} #{t.name}"
+end
+
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'

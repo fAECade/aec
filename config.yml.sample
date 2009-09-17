@@ -1,0 +1,10 @@
+# This is an example configuration file
+
+---
+facade:
+  host: localhost
+  port: 4321
+  verbose: false
+  r: 120
+  g: 120
+  b: 0
