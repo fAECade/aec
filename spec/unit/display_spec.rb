@@ -18,15 +18,15 @@ describe "The virtual AEC facade display" do
       r, g, b = 0, 0, 0
       @display.set_color(r, g, b)
 
-      pixel = 0
+      address = 0
       @display.buffer.each_slice(FAECade::Display::Display::PACKET_SIZE) do |packet|
-        packet[ FAECade::Display::Display::OFFSET_ADDRESS ].should == pixel
+        packet[ FAECade::Display::Display::OFFSET_ADDRESS ].should == address
         packet[ FAECade::Display::Display::OFFSET_RED     ].should == r
         packet[ FAECade::Display::Display::OFFSET_GREEN   ].should == g
         packet[ FAECade::Display::Display::OFFSET_BLUE    ].should == b
-        pixel += 1
+        address += 1
       end
-      pixel.should == FAECade::Display::Display::NR_OF_ADDRESSES
+      address.should == FAECade::Display::Display::NR_OF_ADDRESSES
 
     end
 
@@ -38,15 +38,15 @@ describe "The virtual AEC facade display" do
 
     it "should have all panels set to the specified color" do
 
-      pixel = 0
+      address = 0
       @display.buffer.each_slice(FAECade::Display::Display::PACKET_SIZE) do |packet|
-        packet[ FAECade::Display::Display::OFFSET_ADDRESS ].should == pixel
+        packet[ FAECade::Display::Display::OFFSET_ADDRESS ].should == address
         packet[ FAECade::Display::Display::OFFSET_RED     ].should == @r
         packet[ FAECade::Display::Display::OFFSET_GREEN   ].should == @g
         packet[ FAECade::Display::Display::OFFSET_BLUE    ].should == @b
-        pixel += 1
+        address += 1
       end
-      pixel.should == FAECade::Display::Display::NR_OF_ADDRESSES
+      address.should == FAECade::Display::Display::NR_OF_ADDRESSES
 
     end
 
